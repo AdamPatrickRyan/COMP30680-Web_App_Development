@@ -1,0 +1,282 @@
+
+/*REFERENCE: THIS IS ALMOST AN EXACT VERSION OF MY CSS FROM ASSIGNMENT 1!-->
+/*REFENCCE: Only additional items/changes are added thead tr,  adding more info class, and changing up some of the padding and auto, while also removing some irrelevant items. Largely though, this is almost all identical as I use limited items and it makes sense to use assignment 1's CSS with slight modifications since it applies to this page.
+
+/*--------- General site styling -------------*/
+
+
+/* 
+-------------------
+TABLE OF CONTENTS
+-------------------
+
+-1. Body
+-2. Paragraph
+-3. Header
+-4. Link
+-5. Container
+-6. Header
+-7. Footer
+-8. Input and label
+
+------------------
+END
+------------------
+
+Note: Use CTRL+F and the Number with a dot to navigate to that section.
+
+*/
+
+
+
+/*--------- 1. Body styling -------------*/
+
+/* Modified from Tutorial 3 Solution */
+
+body {
+    font-family: 'Monserrat', sans-serif;
+    background-color: #F9F9F6;
+    width: auto;
+    color: #808080;
+}
+
+
+
+/*--------- 2. Paragraph site styling -------------*/
+
+/* Modified from Tutorial 3 Solution */
+
+p {
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    width: auto;
+    color: #808080;
+    background-color: #F9F9F6;
+}
+
+
+
+/*--------- 3. Header styling -------------*/
+
+
+/* Modified from Tutorial 3 Solution 2 */
+
+/* Header 1 Styling */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    background-color: #F9F9F6;
+    color: #808080;
+    font-size: 50px;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+
+
+
+/* Header 2 Styling */
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    color: #808080;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: auto;
+    background-color: #F9F9F6;
+}
+
+
+
+
+/*--------- 4. Link styling -------------*/
+
+/*-- Below is  css in Tutorial 3 Solution ---*/
+
+/* href Styling */
+a {
+    text-decoration: none;
+    color: #808080;
+}
+
+a:hover {
+    color: #02b8dd;
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+
+/*--------- 5. Container styling -------------*/
+
+
+
+/*  https://www.w3schools.com/cssref/pr_class_clear.asp */
+.clear {
+    clear: both;
+}
+
+
+
+/*  Wrapper - Tutorial 3 Solution*/
+.wrapper {
+    margin: 0 auto;
+    padding-right: 5px;
+    padding-left: 5px;
+    overflow: auto;
+}
+
+
+
+
+/*--------- 6. Header styling -------------*/
+
+/*Tutorial P3P2 */
+header {
+    height: auto;
+    background-color: #444;
+    border-bottom: 3px solid #CCCCCC;
+    overflow: auto;
+}
+
+
+/*Tutorial P3P2 */
+header h1 {
+    position: static;
+    float: left;
+    font-weight: bold;
+    color: #F9F9F6;
+    background-color: #444;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 10px
+}
+
+
+
+
+/*--------- 7. Footer styling -------------*/
+
+/*Tutorial P3P2 */
+
+footer {
+    height: 90px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 20px;
+    background-color: #444;
+    border-top: 3px solid #CCCCCC;
+    overflow: auto;
+    background-color: #444;
+}
+
+
+.footer-font {
+    font-family: 'Monserrat', sans-serif;
+    color: #F9F9F6;
+    background-color: #444;
+    font-style: normal;
+    font-size: 15px;
+    width: auto;
+}
+
+
+.footer-link {
+    font-family: 'Monserrat', sans-serif;
+    color: #F9F9F6;
+    background-color: #444;
+}
+/*--------- 8. Input and Label Styling  -----------------*/
+
+
+
+/* Button styling */
+
+button {
+    position: static;
+    background-color: #151515;
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    line-height: 1;
+    outline: 1px;
+    padding: 5px 35px 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: auto;
+    margin: auto;
+}
+
+.more_info {
+    background-color: #151515;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    line-height: 1;
+    outline: 1px;
+    text-align: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: auto;
+    margin: auto;
+}
+
+/* https://www.w3schools.com/css/css3_buttons.asp */
+
+
+
+/* Table */
+
+/* https://www.w3schools.com/css/css_table.asp */
+table {
+    width: 90%;
+    background-color: white;
+    border: 3px solid black;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+
+thead td {
+    color: #F9F9F6;
+    background-color: #444;
+    font: bold;
+}
+
+tbody tr {
+  border: solid;
+  border-width: 0.1px;
+  border-color: #444;
+}

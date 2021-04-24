@@ -1,0 +1,572 @@
+/*--------- General site styling -------------*/
+
+
+/* 
+-------------------
+TABLE OF CONTENTS
+-------------------
+
+-1. Body
+-2. Paragraph
+-3. Header
+-4. Link
+-5. Container
+-6. List
+-7. Header
+-8. Footer
+-9. About Me (just one image)
+-10. Gallery
+-11. Form
+
+------------------
+END
+------------------
+
+Note: Use CTRL+F and the Number with a dot to navigate to that section.
+
+*/
+
+
+
+/*--------- 1. Body styling -------------*/
+
+/* Modified from Tutorial 3 Solution */
+
+body {
+    font-family: 'Monserrat', sans-serif;
+    background-color: #F9F9F6;
+    width: auto;
+    color: #808080;
+}
+
+
+
+/*--------- 2. Paragraph site styling -------------*/
+
+/* Modified from Tutorial 3 Solution */
+
+p {
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    width: auto;
+    color: #808080;
+    background-color: #F9F9F6;
+}
+
+
+
+
+
+
+/*--------- 3. Header styling -------------*/
+
+
+/* Modified from Tutorial 3 Solution 2 */
+
+/* Header 1 Styling */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    background-color: #F9F9F6;
+    color: #808080;
+    font-size: 50px;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+
+
+
+/* Header 2 Styling */
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    color: #808080;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: auto;
+    background-color: #F9F9F6;
+}
+
+
+
+
+
+h3 {
+    font-family: 'Quicksand', sans-serif;
+    color: #808080;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    width: auto;
+    background-color: #F9F9F6;
+}
+
+
+
+h4 {
+    font-family: 'Quicksand', sans-serif;
+    color: #808080;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+    width: auto;
+    background-color: #F9F9F6;
+}
+
+
+
+/*--------- 4. Link styling -------------*/
+
+/*-- Below is  css in Tutorial 3 Solution ---*/
+
+/* href Styling */
+a {
+    text-decoration: none;
+    color: #808080;
+}
+
+a:hover {
+    color: #02b8dd;
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+
+/*--------- 5. Container styling -------------*/
+
+
+
+/*  https://www.w3schools.com/cssref/pr_class_clear.asp */
+.clear {
+    clear: both;
+}
+
+
+/*  Wrapper - Tutorial 3 Solution*/
+.wrapper {
+    margin: 0 auto;
+    padding-right: 5px;
+    padding-left: 5px;
+    max-width: 900px;
+    overflow: auto;
+}
+
+
+/* Float Containers for better positioning: https://coder-coder.com/display-divs-side-by-side/ */
+
+.float-container {
+    position: static;
+    padding: 5px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.float-two-left-child {
+    width: 40%;
+    position: static;
+    float: left;
+    padding-left: 5px;
+    margin-bottom: 20px;
+}
+
+.float-two-icon-child {
+    width: auto;
+    position: static;
+    float: left;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.float-two-desc-child {
+    width: auto;
+    position: static;
+    float: left;
+    text-align: left;
+    padding-left: 1px;
+    margin-bottom: 20px;
+}
+
+.float-two-right-child {
+    position: static;
+    width: 40%;
+    float: right;
+    padding-right: 5px;
+    padding-left: 1px;
+    margin-bottom: 20px;
+}
+
+.float-three-left-child {
+    position: static;
+    width: 30%;
+    float: left;
+    padding-left: 1px;
+    margin-bottom: 20px;
+}
+
+
+/*--------- 6. List styling -------------*/
+
+
+/* https://www.w3schools.com/cssref/pr_list-style.asp */
+.aboutme-li {
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+
+/*Separate styling for these as I wasnt sure if they'dd have differences - they do */
+.edu-li {
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.exp-li {
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+/* https://www.w3schools.com/css/css3_images.asp --> */
+.work-photo {
+    width: 50px;
+    height: auto;
+    position: relative;
+    overflow: auto
+}
+
+
+/*--------- 7. Header styling -------------*/
+
+/*Tutorial P3P2 */
+header {
+    height: auto;
+    background-color:
+        /* #F9F9F6; */
+        #444;
+    border-bottom: 3px solid #CCCCCC;
+    overflow: auto;
+}
+
+
+/*Tutorial P3P2 */
+header h1 {
+    position: static;
+    float: left;
+    font-weight: bold;
+    color: #F9F9F6;
+    background-color: #444;
+    margin-top: 20px;
+    padding-left: 10px
+}
+
+/*Tutorial P3P2 */
+header nav {
+    position: static;
+    float: right;
+}
+
+/*Tutorial P3P2 */
+header nav ul li {
+    position: static;
+    float: left;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+/*Tutorial P3P2 */
+header nav ul li {
+    position: static;
+    float: left;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+/*Tutorial P3P2 */
+header nav ul li a {
+    color: #F9F9F6;
+    background-color: #444;
+    font-weight: bold;
+    display: block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+}
+
+
+
+
+/*--------- 8. Footer styling -------------*/
+
+/*Tutorial P3P2 */
+
+footer {
+    height: 90px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #444;
+    border-top: 3px solid #CCCCCC;
+    overflow: auto;
+    background-color: #444;
+}
+
+
+.footer-font {
+    font-family: 'Monserrat', sans-serif;
+    color: #F9F9F6;
+    background-color: #444;
+    font-style: normal;
+    font-size: 15px;
+    width: auto;
+}
+
+
+.footer-link {
+    font-family: 'Monserrat', sans-serif;
+    color: #F9F9F6;
+    background-color: #444;
+}
+
+/*--------- 9. About Me -------------*/
+
+/* /https://www.w3schools.com/css/css3_images.asp */
+#about-me-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 50%;
+    border-radius: 50%;
+}
+
+
+/*-- 10. Gallery  ---*/
+
+
+/*--- All gallery specific style: Code  from www.w3schools.com/css/tryit.asp?filename=trycss_image_gallery_responsive  --*/
+
+div.gallery {
+    align-content: center;
+}
+
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    font-family: 'Monserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    width: auto;
+    color: #808080;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 900px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/*--------- iFrame styling -------------
+
+ w3schools */
+
+iframe {
+    display: block;
+    margin: auto;
+    width: auto;
+    overflow: auto;
+
+}
+
+
+/*--------- 11. Contact Me  -----------------*/
+
+input {
+    position: static;
+    width: 90%;
+    font-size: 14px !important;
+    font-family: 'Monserrat', sans-serif;
+    margin: 0 auto;
+    padding: 5px 35px 5px 5px;
+    height: 34px;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    float: left;
+    overflow: auto;
+}
+
+/*-- Forms https://w3schools.com/css/tryit.asp?filename=trycss_forms --*/
+.text-area {
+    position: static;
+    width: 90%;
+    font-size: 14px !important;
+    font-family: 'Monserrat', sans-serif;
+    margin: 0 auto;
+    padding: 5px 35px 5px 5px;
+    height: 150px;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    float: left;
+    overflow: auto;
+
+}
+
+
+.contact-form-multic {
+    position: static;
+    float: left;
+    margin: 0 auto;
+    padding: 5px 35px 5px 5px;
+    width: 90%;
+    font-size: 14px !important;
+    border: 1px solid #CCCCCC;
+    font-family: 'Monserrat', sans-serif;
+    height: 34px;
+    background: #EDECE7;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+label {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    position: static;
+    float: left;
+    text-align: center;
+    color: #808080;
+    font-size: 20px;
+    margin: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: auto;
+}
+
+/* Button styling */
+
+/* https://www.w3schools.com/css/css3_buttons.asp */
+
+.butt-type {
+    position: static;
+    float: left;
+    background-color: #151515;
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin: 10px 0.1px 10px 0.1px;
+    outline: 1px;
+    padding: 5px 35px 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.butt-type:hover {
+    background-color: #02b8dd;
+    color: #fff;
+}
+
+/*Centre align text: https://www.w3schools.com/css/css_align.asp */
+.element-center {
+    text-align: center;
+    border: 3px
+}
+
+
+
+/* Table */
+
+/* https://www.w3schools.com/css/css_table.asp */
+#IT-Table {
+    width: 90%;
+    background-color: white;
+    border: 3px solid black;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+#IT-Table tr:nth-child(even) {
+    background-color: #eee;
+}
+
+#IT-Table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+#IT-Table th {
+    color: #F9F9F6;
+    background-color: #444;
+}

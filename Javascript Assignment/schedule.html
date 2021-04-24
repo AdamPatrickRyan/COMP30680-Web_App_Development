@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Page Structure: Outline is taken from my Assignment 1 in index.html This covers header, footer, and head section-->
+<!--The class wrapper is taken from Assignment 1 which refers back to a prior tutorial-->
+    
+<!-- BEGIN: Header Area: Source my assignment 1 submission -->
+<head>
+    <meta http-equiv="Schedule" content="text/html; charset=utf-8">
+    <meta name="schedule" content="Find the schedule of this content">
+    <meta name="keywords" content="Schedule, Event, JSON, COMP30680">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Schedule</title>
+    
+    <link rel="stylesheet" type="text/css" href="sched.css">
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<!-- END: Header Area -->
+
+
+<!-- BEGIN: Body Area -->
+
+<body>
+
+    <!-- BEGIN: Page Header -->
+    <header>
+        <div class="wrapper">
+            <div class='web-header'>
+                <h1 id='header-title'>CHI'20 Schedule</h1>
+            </div>
+        </div>
+    </header>
+    <!-- END: Page Header -->
+
+
+    <!--BEGIN: Schedule Section-->
+    <section>
+
+
+        <!--BEGIN: Schedule area: Source my assignment 1 submission for wrapper-->
+        <div class="wrapper">
+            
+            <!--BEGIN: Day Choice section-->
+            <!--Not hidden by default-->
+            
+            <div id='Day-Chooser' style="display: inline;">
+
+                <div id='schedule-chooser-div' class='schedule-selection'>
+                    <h2 id='Schedule-Title' class='h2-choice'>Please select a day:</h2>
+                </div>
+
+
+                <div id='day-info-div' class='day-info'>
+                    <label for="Day">Choose a day:</label>
+
+                    <select name="Schedule-Day" id="sched-day" required="true" onchange="GetTimes()">
+                        <option label='Choose a day' value='' disabled=true selected='selected'>Please choose a day</option>
+                    </select>
+
+                    <br>
+                    <label for="Time">Choose a time:</label>
+                    <select name="Schedule-Timeslot" id="sched-time" required="false">
+                    </select>
+
+                    <br>
+                    <button id='day-submit' class='submit' onclick="submit_day_date()">
+                        Submit
+                    </button>
+
+                </div>
+                <!--END: Day Choice section-->
+                
+            </div>
+            
+            <!--BEGIN: Day Details section-->
+            <!--Hidden by default-->          
+            <div id='Day-Info' style="display:none;">
+                <h1 id='Day-Name'></h1>
+                
+                    <p>Showing you events of type: </p>
+                
+                        <div class='radio-filter-choice'>
+                            <input type="radio" id="all-sessions-radio" name="event-types" value="all" checked>
+                                <label for="all">All Events</label>
+
+
+                            <input type="radio" id="paper-sessions-radio" name="event-types" value="paper">
+                                <label for="paper">Paper Events</label>
+
+
+                            <input type="radio" id="non-paper-sessions-radio" name="event-types" value="nopaper">
+                                <label for="nopaper">Non-Paper Events</label>
+                        </div>
+                    <br>
+                    <br>
+
+                    <button id='filter-button' class='submit' onclick="submit_filter()">
+                            Submit
+                    </button>
+                
+                <div id='more-info-wrapper' style="display:none;">
+                    <h2 id='more-info-header'>More Details on your session:</h2>
+                    <div id='More-Info-p'>
+                    </div>
+                </div>
+                <!--END: Day Details section-->
+                
+                
+                
+                
+                <h1>The schedule is: </h1>
+                
+                <table id='Day-Table'></table>
+                
+            </div>
+
+
+        </div>
+        <!--END: Schedule area-->
+
+    </section>
+    <!--END: Schedule Section-->
+
+    <!-- BEGIN: Page Footer: Source my assignment 1 submission -->
+    <footer class="footer">
+        <div class="wrapper">
+            <p class='footer-font'>Created by <a class='footer-link' href='https://ie.linkedin.com/in/adam-p-ryan'>Adam Ryan</a> - COMP30680</p>
+            <div class="clear"></div>
+        </div>
+    </footer>
+    <!-- END: Page Footer -->
+</body></html>
+
+
+
+<script>
+    /* Variables Global */
+    
+    /* Most of my functions rely on simple foor loops: source: https://www.w3schools.com/js/js_loop_for.asp */
+    
+    var file_name='scheduling.json';
+    var xmlhttp = new XMLHttpRequest();
+    var event_schedule;
+    var day_dropdown=document.getElementById('sched-day');
+    var time_dropdown=document.getElementById('sched-time');
+    
+    /* Read the JSON File - Source is the lecture on how to do this.*/
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+            window.event_schedule = JSON.parse(this.responseText);
+      }
+    };
+    
+    xmlhttp.open("GET", file_name, true);
+    xmlhttp.send();
+    
+
+    xmlhttp.onload = function populate_day_selector() {
+        var json_array=window.event_schedule;
+        var i;
+        var day_date;
+        var day_choice;
+        
+        console.log(json_array)
+
+        /* source: https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json */
+        for(i in json_array) {
+            day_date = json_array[i].day + " : " + json_array[i].date;
+            day_choice = document.createElement('option')
+            day_choice.text = day_date
+            day_choice.value = json_array[i].date;
+            day_dropdown.add(day_choice);
+        }
+        
+    }
+    
+    function GetTimes() {
+       var json_array=window.event_schedule;
+       var date_chosen = document.getElementById("sched-day").value;
+       var i;
+       var selected_day_index;
+       var k;
+       var time_slot_choice;
+       var time_slot;
+       var slot_list;
+       var all_time;
+        
+       /* Clear before beginning incase the time gets rechosen */
+       document.getElementById('sched-time').options.length = 0;
+        
+       time_slot = document.createElement('option');
+       time_slot.text = 'All times'
+       time_slot.value = 'All'
+       time_dropdown.add(time_slot);
+        
+
+       for(i in json_array) {
+
+           /* Storing Chosen index */
+            if (date_chosen===json_array[i].date){
+                window.selected_day_index=i;
+                
+                /*Get the time slots in that day*/
+                slots = json_array[i].slots;
+                
+                /* source: https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json */
+                for (k in slots) {
+                        console.log(slots[k].time);
+                        time_slot = document.createElement('option');
+                        time_slot.text = slots[k].time;
+                        time_slot.value = slots[k].time;
+                        time_dropdown.add(time_slot);
+                    }
+                    
+
+            }
+
+       }
+
+    }
+    
+    function submit_day_date() {
+        var json_array = window.event_schedule;
+        var date_chosen = document.getElementById("sched-day").value;
+        var time_chosen = document.getElementById("sched-time").value;
+        var Day_table_body = document.getElementById("Day-table-body");
+        var day_index = window.selected_day_index;
+        
+        var slots = json_array[day_index].slots;
+        var day_chosen=json_array[day_index].day;
+        
+        document.getElementById("Day-Name").innerHTML=day_chosen;
+        document.getElementById("Day-Chooser").style.display = 'none';
+        document.getElementById("Day-Info").style.display = 'inline';
+        
+        var selected_time;
+        
+        var session;
+        var session_name;
+        var session_start_time;
+        var session_location;
+        var session_type;
+        
+        var session_table = document.getElementById("Day-Table");
+        var session_table_header;
+        var session_table_row;
+        var session_table_body;
+        
+        var name_cell;
+        var type_cell;
+        var time_cell;
+        var room_cell;
+        var more_info_cell;
+        
+        var k;
+        var s;
+        var id;
+        
+        session_table.innerHTML='';
+        
+        session_table_header=session_table.createTHead();
+        session_table_row=session_table_header.insertRow(0);
+        
+        time_cell=session_table_row.insertCell(0);
+        time_cell.innerHTML='Session Start Time'
+
+        type_cell=session_table_row.insertCell(1);
+        type_cell.innerHTML='Session Type'
+
+        name_cell=session_table_row.insertCell(2);
+        name_cell.innerHTML='Session Name'
+
+        room_cell=session_table_row.insertCell(3);
+        room_cell.innerHTML='Session Room'
+        
+        more_info_cell=session_table_row.insertCell(4);
+        more_info_cell.innerHTML='More Info'
+        
+        session_table_body=session_table.createTBody();
+
+        
+        /* clear table each time */
+        
+        
+        if (time_chosen=='All'){
+            console.log(slots)
+       
+            
+            for (k in slots) {
+                session=slots[k].sessions;
+                console.log(session);
+                
+                if (session.length>0){
+                    for (s in session) {
+                        console.log(s)
+
+                        if (session[s] != []){
+                            console.log('k_s is: '+k+'_'+s)
+                            id=k+'_'+s
+                            console.log('key is: '+ session[s].key)
+                            session_name=session[s].title;
+                            console.log(session_name);
+
+                            session_type=session[s].type;
+                            console.log(session_type);
+
+                            session_start_time=session[s].time;
+                            console.log(session_start_time);
+
+                            session_location=session[s].room;
+                            console.log(session_location);
+
+                            session_table_row=session_table_body.insertRow(-1);
+
+                            time_cell=session_table_row.insertCell(0);
+                            time_cell.innerHTML=session_start_time;
+
+                            type_cell=session_table_row.insertCell(1);
+                            type_cell.innerHTML=session_type;
+
+                            name_cell=session_table_row.insertCell(2);
+                            name_cell.innerHTML=session_name;
+
+                            room_cell=session_table_row.insertCell(3);
+                            room_cell.innerHTML=session_location;
+                            
+                            more_info_cell=session_table_row.insertCell(4);
+                            more_info_cell.innerHTML='<input type="button" class="more_info" id="'+id+'" value="+" onclick="more_info(this.id)"></input>'
+                        }
+
+                        else{
+                            session_name='No Session - Networking Opportunity';
+                            console.log(session_name);
+
+                            session_type='N/A';
+                            console.log(session_type);
+
+                            session_start_time=slots[k].time.substring(0, 5)+':00';
+                            console.log(session_start_time);
+
+                            session_location='N/A';
+                            console.log(session_location);
+
+
+                            session_table_row=session_table_body.insertRow(-1);
+
+                            time_cell=session_table_row.insertCell(0);
+                            time_cell.innerHTML=session_start_time;
+
+                            type_cell=session_table_row.insertCell(1);
+                            type_cell.innerHTML=session_type;
+
+                            name_cell=session_table_row.insertCell(2);
+                            name_cell.innerHTML=session_name;
+
+                            room_cell=session_table_row.insertCell(3);
+                            room_cell.innerHTML=session_location;
+                            
+                            more_info_cell=session_table_row.insertCell(4);
+                            more_info_cell.innerHTML=''
+                        }
+
+
+
+                    }
+                }
+                else{
+                    session_name='No Session - Networking Opportunity';
+                    console.log(session_name);
+
+                    session_type='Networking';
+                    console.log(session_type);
+
+                    session_start_time=slots[k].time.substring(0, 5)+':00'
+                    console.log(session_start_time);
+
+                    session_location='N/A';
+                    console.log(session_location);
+
+
+                    session_table_row=session_table_body.insertRow(-1);
+
+                    time_cell=session_table_row.insertCell(0);
+                    time_cell.innerHTML=session_start_time;
+
+                    type_cell=session_table_row.insertCell(1);
+                    type_cell.innerHTML=session_type;
+
+                    name_cell=session_table_row.insertCell(2);
+                    name_cell.innerHTML=session_name;
+
+                    room_cell=session_table_row.insertCell(3);
+                    room_cell.innerHTML=session_location;    
+                    
+                    more_info_cell=session_table_row.insertCell(4);
+                    more_info_cell.innerHTML=''
+                }
+            }
+            
+            
+            
+        }
+        else{      
+            
+            for (k in slots) {
+                
+                if (slots[k].time==time_chosen){
+                    
+                    session=slots[k].sessions;
+                    console.log(session);
+                    
+                    if (session.length>0){
+
+
+                        for (s in session) {
+                            console.log(session[s])
+                            console.log(session[s].length)
+
+                            if (session[s] != []){
+                                console.log('k_s is: '+k+'_'+s)
+                                id=k+'_'+s
+                                console.log('key is:' + session[s].key)
+                                session_name=session[s].title;
+                                console.log(session_name);
+
+                                session_type=session[s].type;
+                                console.log(session_type);
+
+                                session_start_time=session[s].time;
+                                console.log(session_start_time);
+
+                                session_location=session[s].room;
+                                console.log(session_location);
+
+
+                                session_table_row=session_table_body.insertRow(-1);
+
+                                time_cell=session_table_row.insertCell(0);
+                                time_cell.innerHTML=session_start_time;
+
+                                type_cell=session_table_row.insertCell(1);
+                                type_cell.innerHTML=session_type;
+
+                                name_cell=session_table_row.insertCell(2);
+                                name_cell.innerHTML=session_name;
+
+                                room_cell=session_table_row.insertCell(3);
+                                room_cell.innerHTML=session_location;
+                                
+                                more_info_cell=session_table_row.insertCell(4);
+                                more_info_cell.innerHTML='<input type="button" class="more_info" id="'+id+'" value="+" onclick="more_info(this.id)"></input>'
+                            }
+
+                            else{
+                                session_name='No Session - Networking Opportunity';
+                                console.log(session_name);
+
+                                session_type='Networking';
+                                console.log(session_type);
+
+                                session_start_time=time_chosen.substring(0, 5)+':00';
+                                console.log(session_start_time);
+
+                                session_location='N/A';
+                                console.log(session_location);
+
+
+                                session_table_row=session_table_body.insertRow(-1);
+
+                                time_cell=session_table_row.insertCell(0);
+                                time_cell.innerHTML=session_start_time;
+
+                                type_cell=session_table_row.insertCell(1);
+                                type_cell.innerHTML=session_type;
+
+                                name_cell=session_table_row.insertCell(2);
+                                name_cell.innerHTML=session_name;
+
+                                room_cell=session_table_row.insertCell(3);
+                                room_cell.innerHTML=session_location;
+                                
+                                more_info_cell=session_table_row.insertCell(4);
+                                more_info_cell.innerHTML=''
+                            }
+                        } 
+                    }
+                    
+                    else{
+                        session_name='No Session';
+                        console.log(session_name);
+
+                        session_type='Networking';
+                        console.log(session_type);
+
+                        session_start_time=time_chosen.substring(0, 5)+':00';
+                        console.log(session_start_time);
+
+                        session_location='N/A';
+                        console.log(session_location);
+
+
+                        session_table_row=session_table_body.insertRow(-1);
+
+                        time_cell=session_table_row.insertCell(0);
+                        time_cell.innerHTML=session_start_time;
+
+                        type_cell=session_table_row.insertCell(1);
+                        type_cell.innerHTML=session_type;
+
+                        name_cell=session_table_row.insertCell(2);
+                        name_cell.innerHTML=session_name;
+
+                        room_cell=session_table_row.insertCell(3);
+                        room_cell.innerHTML=session_location;    
+                        
+                        more_info_cell=session_table_row.insertCell(4);
+                        more_info_cell.innerHTML=''
+                    }
+                    
+                    
+                }
+
+            
+            }
+            
+        }
+    }
+   
+    function submit_filter() {
+    // source=https://www.w3schools.com/howto/howto_js_filter_table.asp
+      var radbut;
+      var input;
+      var filter;
+      var table;
+      var tr;
+      var td;
+      var i;
+      var r;
+      var txtValue;
+          
+        
+      radbut = document.getElementsByName("event-types");
+      document.getElementById('more-info-wrapper').style.display = 'none';
+        
+        for (r in radbut){
+            if(radbut[r].checked){
+                input=radbut[r].value;
+            }
+            
+        }
+        
+      console.log(input)
+      table = document.getElementById("Day-Table");
+      tr = table.getElementsByTagName("tr");
+        
+      for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = '';
+            }
+        
+
+      // Loop through all table rows, and hide those who don't match the search query
+
+     if (input!='all'){
+         if (input=='paper'){
+              for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                console.log(td.innerText)
+                  
+                if (td.innerText=='paper') {
+                    tr[i].style.display = '';
+                  } else {
+                    tr[i].style.display = 'none';
+                  }
+                }
+              }
+         else{
+              for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                console.log(td.innerText)
+                  
+                if (td.innerText!='paper') {
+                    tr[i].style.display = '';
+                  } else {
+                    tr[i].style.display = 'none';
+                  }
+                }
+              }          
+         }        
+    }
+    
+    
+    function more_info(id){
+        console.log('id is: '+ id)
+        var json_array = window.event_schedule;
+        var date_chosen = document.getElementById("sched-day").value;
+        var time_chosen = document.getElementById("sched-time").value;
+        var Day_table_body = document.getElementById("Day-table-body");
+        var day_index = window.selected_day_index;
+        var k;
+        var author;
+        var doi;
+        var doilink;
+        var abstract;
+        var q;
+        var s;
+        var sub_count;
+        var sub;
+        var out=document.getElementById("More-Info-p");
+        var text_out='';
+        out.innerHtml=text_out;
+        document.getElementById('more-info-wrapper').style.display = '';
+        
+        var slots = json_array[day_index].slots;
+        var day_chosen=json_array[day_index].day;
+        
+        document.getElementById("Day-Name").innerHTML=day_chosen;
+                
+        var selected_time;
+        
+        k=id.split("_")[0];
+        s=id.split("_")[1]
+        
+        sessions=slots[k].sessions[s];
+        console.log(sessions)
+        submissions=sessions.submissions;
+        sub_count=1;
+            
+        for (q in submissions){            
+            console.log(submissions[q])
+            author=submissions[q].title;
+            doilink=submissions[q].doiUrl;
+            abstract=submissions[q].abstract;
+
+            text_out+='Submission: '+sub_count+'<br><br>Title:<br>'+ author + '<br><br>' +'DOI Link:<br><a target="_blank" href="'+doilink+'">Click Here</a>'+'<br><br>Abstract:<br>'+abstract+'<br><br>------<br><br>';
+            sub_count++;
+        }
+                    
+                    
+                
+                
+    
+            
+    console.log(text_out)
+        
+    if(text_out!=''){
+        document.getElementById("More-Info-p").innerHTML=text_out;
+        console.log(document.getElementById("More-Info-p").innerHTML);
+    }
+    else{
+        /*Error handling - No details on that submission */
+        text_out='Sorry, there is no additional info at this time';
+            document.getElementById("More-Info-p").innerHTML=text_out;
+        console.log(document.getElementById("More-Info-p").innerHTML);
+    }
+    }
+    
+</script>
+
